@@ -1,0 +1,2 @@
+rootProject.name = "GQL-Talk"
+include ':app'
