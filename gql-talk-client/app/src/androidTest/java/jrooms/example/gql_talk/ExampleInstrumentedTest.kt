@@ -1,4 +1,4 @@
-package com.example.gql_talk
+package jrooms.example.gql_talk
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

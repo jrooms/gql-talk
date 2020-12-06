@@ -1,7 +1,8 @@
-package com.example.gql_talk
+package jrooms.example.gql_talk
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.gql_talk.R
 
 class MainActivity : AppCompatActivity() {
 
