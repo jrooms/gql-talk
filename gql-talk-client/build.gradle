@@ -41,6 +41,9 @@ ext {
     // rxjava
     rxjavaVersion = '3.0.0'
 
+    // coroutines
+    coroutinesVersion = '1.4.0'
+
     // glide
     glideVersion = '4.11.0'
 

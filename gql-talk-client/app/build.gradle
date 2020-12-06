@@ -63,8 +63,12 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxandroid:$rxjavaVersion"
 
     // apollo graphql
-    implementation "com.apollographql.apollo:apollo-runtime-kotlin:$apolloVersion"
+    implementation "com.apollographql.apollo:apollo-runtime:$apolloVersion"
     implementation "com.apollographql.apollo:apollo-coroutines-support:$apolloVersion"
+
+    // coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
 
     // debugger
     implementation "com.jakewharton.timber:timber:$timberVersion"
