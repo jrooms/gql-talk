@@ -3,7 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
-    id 'dagger.hilt.android.plugin'
+    id 'com.apollographql.apollo' version "$apolloVersion"
 }
 
 android {
@@ -37,9 +37,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        dataBinding = true
-    }
 }
 
 dependencies {
@@ -52,11 +49,6 @@ dependencies {
 
     // architecture components
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVersion"
-    implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
     implementation "androidx.room:room-runtime:$roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
@@ -65,18 +57,17 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxjava:$rxjavaVersion"
     implementation "io.reactivex.rxjava3:rxandroid:$rxjavaVersion"
 
+    // apollo graphql
+    implementation "com.apollographql.apollo:apollo-runtime:$apolloVersion"
+    implementation "com.apollographql.apollo:apollo-android-support:$apolloVersion"
+    implementation "com.apollographql.apollo:apollo-runtime-kotlin:$apolloVersion"
+
     // debugger
     implementation "com.jakewharton.timber:timber:$timberVersion"
 
     // glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
-
-    // hilt
-    implementation "com.google.dagger:hilt-android:$hiltVersion"
-    kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltAndroidXVersion"
-    kapt "androidx.hilt:hilt-compiler:$hiltAndroidXVersion"
 
     // local unit test
     testImplementation "junit:junit:$junitVersion"
