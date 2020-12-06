@@ -4,7 +4,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@nexus/schema": "^0.19.2",
+    "@nexus/schema": "^0.19.1",
     "apollo-server": "^2.19.0",
     "graphql": "^15.4.0"
   },
