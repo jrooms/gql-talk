@@ -39,6 +39,11 @@ android {
     }
 }
 
+apollo {
+    // instruct the compiler to generate Kotlin models
+    generateKotlinModels.set(true)
+}
+
 dependencies {
     // android support
     implementation "com.google.android.material:material:$materialVersion"
@@ -58,9 +63,8 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxandroid:$rxjavaVersion"
 
     // apollo graphql
-    implementation "com.apollographql.apollo:apollo-runtime:$apolloVersion"
-    implementation "com.apollographql.apollo:apollo-android-support:$apolloVersion"
     implementation "com.apollographql.apollo:apollo-runtime-kotlin:$apolloVersion"
+    implementation "com.apollographql.apollo:apollo-coroutines-support:$apolloVersion"
 
     // debugger
     implementation "com.jakewharton.timber:timber:$timberVersion"
