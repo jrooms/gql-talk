@@ -1,4 +1,4 @@
-<h1 align="left"> Android GraphQL (Apollo server) </h1>
+<h1 align="left"> Android GraphQL (Apollo Client) </h1>
 
 ## Blog Post
 [Android GraphQL tutorials (1) - Apollo Client? / setup apollo schema - 작성중]()
