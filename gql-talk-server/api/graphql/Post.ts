@@ -15,15 +15,15 @@ export const PostQuery = extendType({
     definition(t) {
         t.nonNull.list.field('drafts', {
             type: Post,
-            resolve(_root, _args, ctx) {                              // 1
-                return ctx.db.posts.filter(p => p.published === false)  // 2
+            resolve(_root, _args, ctx) {                           
+                return ctx.db.post.findMany({ where: { published: false } })
             },
         })
 
         t.list.field('posts', {
             type: Post,
             resolve(_root, _args, ctx) {
-                return ctx.db.posts.filter(p => p.published === true)
+                return ctx.db.post.findMany({ where: { published: true } })
             },
         })
     },
@@ -35,19 +35,17 @@ export const PostMutation = extendType({
 
         t.nonNull.field('createDraft', {
             type: Post,
-            args: {                                        // 1
-                title: nonNull(stringArg()),                 // 2
-                body: nonNull(stringArg()),                  // 2
+            args: {
+                title: nonNull(stringArg()),
+                body: nonNull(stringArg()),
             },
             resolve(_root, args, ctx) {
                 const draft = {
-                    id: ctx.db.posts.length + 1,
-                    title: args.title,                         // 3
-                    body: args.body,                           // 3
+                    title: args.title,
+                    body: args.body,
                     published: false,
                 }
-                ctx.db.posts.push(draft)
-                return draft
+                return ctx.db.post.create({ data: draft })
             },
         })
 
@@ -57,12 +55,12 @@ export const PostMutation = extendType({
                 draftId: nonNull(intArg()),
             },
             resolve(_root, args, ctx) {
-                let draftToPublish = ctx.db.posts.find(p => p.id === args.draftId)
-                if (!draftToPublish) {
-                    throw new Error('Could not find draft with id ' + args.draftId)
-                }
-                draftToPublish.published = true
-                return draftToPublish
+                return ctx.db.post.update({
+                    where: { id: args.draftId },
+                    data: {
+                      published: true,
+                    },
+                  });
             },
         })
     },

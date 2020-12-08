@@ -8,10 +8,12 @@
   },
   "dependencies": {
     "@nexus/schema": "^0.19.1",
+    "@prisma/client": "^2.12.1",
     "apollo-server": "^2.19.0",
     "graphql": "^15.4.0"
   },
   "devDependencies": {
+    "@prisma/cli": "^2.12.1",
     "@types/jest": "^26.0.16",
     "get-port": "^5.1.1",
     "graphql-request": "^3.3.0",
