@@ -4,10 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.apollographql.apollo.ApolloClient
-import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.coroutines.toFlow
 import com.apollographql.apollo.exception.ApolloException
 import com.example.gql_talk.R
+import jrooms.example.DraftsQuery
 import jrooms.example.PostsQuery
 
 import kotlinx.coroutines.GlobalScope
@@ -23,13 +23,16 @@ class MainActivity : AppCompatActivity() {
         // First, create an `ApolloClient`
         // Replace the serverUrl with your GraphQL endpoint
         val apolloClient = ApolloClient.builder()
-            .serverUrl("http://localhost:4000/graphql/endpoint")
+            .serverUrl("http://10.0.2.2:4000/graphql/endpoint")
             .build()
 
         GlobalScope.launch {
             val response = try {
                 apolloClient.query(PostsQuery()).toFlow().collect {
                     Log.e("response","${it.data?.posts}")
+                }
+                apolloClient.query(DraftsQuery()).toFlow().collect {
+                    Log.e("response","${it.data?.drafts}")
                 }
             } catch (e: ApolloException) {
                 // handle protocol errors
