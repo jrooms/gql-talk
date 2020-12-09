@@ -1,0 +1,20 @@
+mutation CreateDraft($title: String!, $body: String!) {
+    createDraft(title:$title, body: $body) {
+        title
+        id
+    }
+}
+
+query Drafts {
+    drafts {
+        id
+        published
+    }
+}
+
+query Posts {
+    posts {
+        id
+        published
+    }
+}

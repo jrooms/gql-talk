@@ -2,44 +2,40 @@ package jrooms.example.gql_talk
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.coroutines.toDeferred
+import com.apollographql.apollo.coroutines.toFlow
 import com.apollographql.apollo.exception.ApolloException
 import com.example.gql_talk.R
-import jrooms.example.LaunchDetailsQuery
+import jrooms.example.PostsQuery
+
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-    // First, create an `ApolloClient`
-    // Replace the serverUrl with your GraphQL endpoint
-    val apolloClient = ApolloClient.builder()
-      .serverUrl("https://apollo-fullstack-tutorial.herokuapp.com/graphql/endpoint")
-      .build()
+        // First, create an `ApolloClient`
+        // Replace the serverUrl with your GraphQL endpoint
+        val apolloClient = ApolloClient.builder()
+            .serverUrl("http://localhost:4000/graphql/endpoint")
+            .build()
 
-    GlobalScope.launch {
-      val response = try {
-        apolloClient.query(LaunchDetailsQuery(id = "83")).toDeferred().await()
-      } catch (e: ApolloException) {
-        // handle protocol errors
-        return@launch
-      }
-
-      val launch = response.data?.launch
-      if (launch == null || response.hasErrors()) {
-        // handle application errors
-        return@launch
-      }
-
-      // launch now contains a typesafe model of your data
-      println("Launch site: ${launch.site}")
+        GlobalScope.launch {
+            val response = try {
+                apolloClient.query(PostsQuery()).toFlow().collect {
+                    Log.e("response","${it.data?.posts}")
+                }
+            } catch (e: ApolloException) {
+                // handle protocol errors
+                Log.e("exception", "${e.message}")
+                return@launch
+            }
+        }
     }
-
-  }
-
 }
