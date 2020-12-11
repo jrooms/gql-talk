@@ -5,6 +5,13 @@ mutation CreateDraft($title: String!, $body: String!) {
     }
 }
 
+mutation Publish($id: Int!) {
+    publish(draftId: $id){
+        id
+        title
+    }
+}
+
 query Drafts {
     drafts {
         id

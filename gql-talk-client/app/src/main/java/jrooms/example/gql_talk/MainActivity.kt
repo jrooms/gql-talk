@@ -7,8 +7,10 @@ import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.coroutines.toFlow
 import com.apollographql.apollo.exception.ApolloException
 import com.example.gql_talk.R
+import jrooms.example.CreateDraftMutation
 import jrooms.example.DraftsQuery
 import jrooms.example.PostsQuery
+import jrooms.example.PublishMutation
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
@@ -28,11 +30,17 @@ class MainActivity : AppCompatActivity() {
 
         GlobalScope.launch {
             val response = try {
+                apolloClient.mutate(CreateDraftMutation("android", "client")).toFlow().collect {
+                    Log.e("response", "${it.data?.createDraft}")
+                }
+                apolloClient.mutate(PublishMutation(3)).toFlow().collect {
+                    Log.e("response","${it.data?.publish}")
+                }
                 apolloClient.query(PostsQuery()).toFlow().collect {
-                    Log.e("response","${it.data?.posts}")
+                    Log.e("response", "${it.data?.posts}")
                 }
                 apolloClient.query(DraftsQuery()).toFlow().collect {
-                    Log.e("response","${it.data?.drafts}")
+                    Log.e("response", "${it.data?.drafts}")
                 }
             } catch (e: ApolloException) {
                 // handle protocol errors
