@@ -77,6 +77,9 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
 
+    // lottie
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
     // local unit test
     testImplementation "junit:junit:$junitVersion"
     testImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
