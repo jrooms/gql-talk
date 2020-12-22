@@ -7,3 +7,4 @@
 - [Kotlin](https://kotlinlang.org/) based
 - [Coroutines](https://github.com/Kotlin/kotlinx.coroutines)
 - [ApolloClient](https://www.apollographql.com/docs/android/essentials/get-started-kotlin/)
+- [Lottie](https://github.com/airbnb/lottie-android)
