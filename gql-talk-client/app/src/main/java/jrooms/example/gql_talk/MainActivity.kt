@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
             .serverUrl("http://10.0.2.2:4000/graphql/endpoint")
             .build()
 
+        //test
         GlobalScope.launch {
             val response = try {
                 apolloClient.mutate(CreateDraftMutation("android", "client")).toFlow().collect {
